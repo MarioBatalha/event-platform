@@ -9,13 +9,22 @@ query {
     title
   }
 }`
+
+interface Lesson {
+  id: string;
+  title: string;
+}
 const App = () => {
-  const { data } = useQuery(GET_LESSON_QUERY);
+  const { data } = useQuery<{ lessons: Lesson[] }>(GET_LESSON_QUERY);
   console.log(data)
   return (
-    <h1 className="text-2xl">
-      Hi there
-    </h1>
+    <ul>
+      {
+        data?.lessons.map(lesson => {
+          return <li key={lesson.id}>{lesson.title}</li>
+        })
+      }
+    </ul>
   )
 }
 
