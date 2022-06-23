@@ -1,6 +1,6 @@
 const Video = () => {
     return (
-        <h1>Video page</h1>
+        <div className="flex-1">Video page</div>
     )
 }
 
