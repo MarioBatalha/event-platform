@@ -1,4 +1,5 @@
 import { CheckCircle, Lock } from 'phosphor-react';
+import { isPast } from 'date-fns';
 
 interface LessonProps {
     title: string;
@@ -8,7 +9,7 @@ interface LessonProps {
 }
 
 const Lesson = (props: LessonProps) => {
-    const isLessonAvailable = false;
+    const isLessonAvailable = isPast(props.availableAt)
   return (
     <a href="#">
       <span className="text-gray-300">{props.availableAt.toString()}</span>
