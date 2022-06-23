@@ -1,6 +1,10 @@
+import { IconLogo } from './IconLogo';
+
 const Header = () => {
     return (
-        <h1>Header page</h1>
+       <header className='w-full py-5 flex items-center justify-center'>
+        <IconLogo />
+       </header>
     )
 }
 
