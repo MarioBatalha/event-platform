@@ -1,0 +1,76 @@
+import { PlayerProps } from '../../../core/player/PlayerProps';
+import { TooltipDirection, TooltipPosition } from '../../tooltip/types';
+/**
+ * A control for adjusting the volume of the player and toggling the muted state.
+ *
+ * ## Visual
+ *
+ * <img
+ *   src="https://raw.githubusercontent.com/vime-js/vime/master/packages/core/src/components/ui/controls/volume-control/volume-control.png"
+ *   alt="Vime volume control component"
+ * />
+ */
+export declare class VolumeControl {
+  private dispatch;
+  private keyboardDisposal;
+  private prevMuted;
+  private hideSliderTimeout?;
+  currentVolume: number;
+  isSliderActive: boolean;
+  /**
+   * The name of the low volume icon to resolve from the icon library.
+   */
+  lowVolumeIcon: string;
+  /**
+   * The name of the high volume icon to resolve from the icon library.
+   */
+  highVolumeIcon: string;
+  /**
+   * The name of the muted volume icon to resolve from the icon library.
+   */
+  mutedIcon: string;
+  /**
+   * The name of an icon library to use. Defaults to the library defined by the `icons` player
+   * property.
+   */
+  icons?: string;
+  /**
+   * Whether the tooltip is positioned above/below the control.
+   */
+  tooltipPosition: TooltipPosition;
+  /**
+   * The direction in which the tooltip should grow.
+   */
+  tooltipDirection: TooltipDirection;
+  /**
+   * Whether the tooltip should be hidden.
+   */
+  hideTooltip: boolean;
+  /**
+   * A pipe (`/`) separated string of JS keyboard keys, that when caught in a `keydown` event, will
+   * toggle the muted state of the player.
+   */
+  muteKeys?: string;
+  /**
+   * Prevents the volume being changed using the Up/Down arrow keys.
+   */
+  noKeyboard: boolean;
+  onNoKeyboardChange(): Promise<void>;
+  /** @internal */
+  muted: PlayerProps['muted'];
+  /** @internal */
+  volume: PlayerProps['volume'];
+  onPlayerVolumeChange(): void;
+  /** @internal */
+  isMobile: PlayerProps['isMobile'];
+  /** @internal */
+  i18n: PlayerProps['i18n'];
+  constructor();
+  connectedCallback(): void;
+  disconnectedCallback(): void;
+  private onShowSlider;
+  private onHideSlider;
+  private onVolumeChange;
+  private onKeyDown;
+  render(): any;
+}

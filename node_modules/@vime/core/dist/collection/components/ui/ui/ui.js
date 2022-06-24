@@ -1,0 +1,127 @@
+import { Component, h, Prop } from '@stencil/core';
+import { IS_IOS } from '../../../utils/support';
+import { withComponentRegistry } from '../../core/player/withComponentRegistry';
+import { withPlayerContext } from '../../core/player/withPlayerContext';
+/**
+ * Simple container that holds a collection of user interface components.
+ *
+ * The only important role this component really has is, avoiding overlapping custom UI with the
+ * native iOS media player UI. Therefore, custom UI is only displayed on iOS if the `playsinline`
+ * prop is `true`, and the player is not in fullscreen mode.
+ *
+ * @slot - Used to pass in UI components for the player.
+ */
+export class UI {
+  constructor() {
+    /** @internal */
+    this.isVideoView = false;
+    /** @internal */
+    this.playsinline = false;
+    /** @internal */
+    this.isFullscreenActive = false;
+    withComponentRegistry(this);
+    withPlayerContext(this, [
+      'isVideoView',
+      'playsinline',
+      'isFullscreenActive',
+    ]);
+  }
+  render() {
+    const canShowCustomUI = !IS_IOS ||
+      !this.isVideoView ||
+      (this.playsinline && !this.isFullscreenActive);
+    return (h("div", { class: {
+        ui: true,
+        hidden: !canShowCustomUI,
+        video: this.isVideoView,
+      } }, canShowCustomUI && h("slot", null)));
+  }
+  static get is() { return "vm-ui"; }
+  static get encapsulation() { return "shadow"; }
+  static get originalStyleUrls() { return {
+    "$": ["ui.css"]
+  }; }
+  static get styleUrls() { return {
+    "$": ["ui.css"]
+  }; }
+  static get properties() { return {
+    "isVideoView": {
+      "type": "boolean",
+      "mutable": false,
+      "complexType": {
+        "original": "PlayerProps['isVideoView']",
+        "resolved": "boolean",
+        "references": {
+          "PlayerProps": {
+            "location": "import",
+            "path": "../../core/player/PlayerProps"
+          }
+        }
+      },
+      "required": false,
+      "optional": false,
+      "docs": {
+        "tags": [{
+            "text": undefined,
+            "name": "internal"
+          }],
+        "text": ""
+      },
+      "attribute": "is-video-view",
+      "reflect": false,
+      "defaultValue": "false"
+    },
+    "playsinline": {
+      "type": "boolean",
+      "mutable": false,
+      "complexType": {
+        "original": "PlayerProps['playsinline']",
+        "resolved": "boolean",
+        "references": {
+          "PlayerProps": {
+            "location": "import",
+            "path": "../../core/player/PlayerProps"
+          }
+        }
+      },
+      "required": false,
+      "optional": false,
+      "docs": {
+        "tags": [{
+            "text": undefined,
+            "name": "internal"
+          }],
+        "text": ""
+      },
+      "attribute": "playsinline",
+      "reflect": false,
+      "defaultValue": "false"
+    },
+    "isFullscreenActive": {
+      "type": "boolean",
+      "mutable": false,
+      "complexType": {
+        "original": "PlayerProps['isFullscreenActive']",
+        "resolved": "boolean",
+        "references": {
+          "PlayerProps": {
+            "location": "import",
+            "path": "../../core/player/PlayerProps"
+          }
+        }
+      },
+      "required": false,
+      "optional": false,
+      "docs": {
+        "tags": [{
+            "text": undefined,
+            "name": "internal"
+          }],
+        "text": ""
+      },
+      "attribute": "is-fullscreen-active",
+      "reflect": false,
+      "defaultValue": "false"
+    }
+  }; }
+}

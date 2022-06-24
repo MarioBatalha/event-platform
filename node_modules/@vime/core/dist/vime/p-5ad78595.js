@@ -1,0 +1,1 @@
+import{g as a}from"./p-aa8acb66.js";import{d as e}from"./p-b018976f.js";const t="vmStateChange",o=t=>(o,s)=>{const m=e(t,HTMLElement)?t:a(t),p=new CustomEvent("vmStateChange",{bubbles:!0,composed:!0,detail:{by:m,prop:o,value:s}});m.dispatchEvent(p)};export{t as S,o as c}

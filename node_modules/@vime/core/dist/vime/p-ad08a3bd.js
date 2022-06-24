@@ -1,0 +1,1 @@
+import{w as o}from"./p-cbbce638.js";const a=(a,t=[])=>o(a,["autoplay","controls","language","muted","logger","loop","aspectRatio","playsinline",...t]);export{a as w}

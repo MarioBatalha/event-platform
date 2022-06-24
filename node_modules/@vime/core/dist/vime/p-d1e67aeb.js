@@ -1,0 +1,1 @@
+const t=(t=0,$=!1)=>{const a=t=>`0${t}`.slice(-2),h=Math.trunc(t/60/60%60),n=Math.trunc(t/60%60),o=(t=>Math.trunc(t%60))(t);return`${$||h>0?`${h}:`:""}${a(n)}:${a(o)}`};export{t as f}

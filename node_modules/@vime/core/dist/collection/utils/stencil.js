@@ -1,0 +1,26 @@
+import { isUndefined } from './unit';
+export function wrapStencilHook(component, lifecycle, hook) {
+  const prevHook = component[lifecycle];
+  component[lifecycle] = function () {
+    hook();
+    return prevHook ? prevHook.call(component) : undefined;
+  };
+}
+export function createStencilHook(component, onConnect, onDisconnect) {
+  let hasLoaded = false;
+  if (!isUndefined(onConnect)) {
+    wrapStencilHook(component, 'componentWillLoad', () => {
+      onConnect();
+      hasLoaded = true;
+    });
+    wrapStencilHook(component, 'connectedCallback', () => {
+      if (hasLoaded)
+        onConnect();
+    });
+  }
+  if (!isUndefined(onDisconnect)) {
+    wrapStencilHook(component, 'disconnectedCallback', () => {
+      onDisconnect();
+    });
+  }
+}

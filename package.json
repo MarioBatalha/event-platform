@@ -9,6 +9,8 @@
   },
   "dependencies": {
     "@apollo/client": "^3.6.8",
+    "@vime/core": "^5.3.1",
+    "@vime/react": "^5.3.1",
     "apollo-client": "^2.6.10",
     "date-fns": "^2.28.0",
     "graphql": "^15.8.0",

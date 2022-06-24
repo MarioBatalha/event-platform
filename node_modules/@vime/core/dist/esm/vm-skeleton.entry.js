@@ -1,0 +1,44 @@
+import { r as registerInstance, h } from './index-f5fd0f81.js';
+import { c as withComponentRegistry } from './withComponentRegistry-28311671.js';
+import { w as withPlayerContext } from './withPlayerContext-4c52f564.js';
+import './PlayerEvents-5c5704d6.js';
+
+const skeletonCss = ":host{position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:var(--vm-skeleton-z-index)}@keyframes sheen{0%{background-position:200% 0}to{background-position:-200% 0}}.skeleton{width:100%;height:100%;display:flex;min-height:1rem;pointer-events:auto}.sheen.hidden{opacity:0;visibility:hidden;transition:var(--vm-fade-transition);pointer-events:none}.indicator{flex:1 1 auto;background:var(--vm-skeleton-color)}.skeleton.sheen .indicator{background:linear-gradient(\n    270deg,\n    var(--vm-skeleton-sheen-color),\n    var(--vm-skeleton-color),\n    var(--vm-skeleton-color),\n    var(--vm-skeleton-sheen-color)\n  );background-size:400% 100%;background-size:400% 100%;animation:sheen 8s ease-in-out infinite}";
+
+const Skeleton = class {
+  constructor(hostRef) {
+    registerInstance(this, hostRef);
+    this.hidden = false;
+    /**
+     * Determines which animation effect the skeleton will use.
+     * */
+    this.effect = 'sheen';
+    /** @internal */
+    this.ready = false;
+    withComponentRegistry(this);
+    withPlayerContext(this, ['ready']);
+  }
+  onReadyChange() {
+    if (!this.ready) {
+      this.hidden = false;
+    }
+    else {
+      setTimeout(() => {
+        this.hidden = true;
+      }, 500);
+    }
+  }
+  render() {
+    return (h("div", { class: {
+        skeleton: true,
+        hidden: this.hidden,
+        sheen: this.effect === 'sheen',
+      } }, h("div", { class: "indicator" })));
+  }
+  static get watchers() { return {
+    "ready": ["onReadyChange"]
+  }; }
+};
+Skeleton.style = skeletonCss;
+
+export { Skeleton as vm_skeleton };
