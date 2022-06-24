@@ -32,7 +32,7 @@ const Video = () => {
                             />
                             <div className="leading-relaxed">
                                 <strong className="font-bold text-2xl block">Mário Batalha Silva</strong>
-                                <span className="text-gray-200 text-sm block">CTO @Front-end developer</span>
+                                <span className="text-gray-200 text-sm block">Front-end developer @Cygnus code</span>
                             </div>
                         </div>
                     </div>
