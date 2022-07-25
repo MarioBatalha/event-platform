@@ -70,7 +70,7 @@ const Video = () => {
                             <p className="text-sm text-gray-200 mt-2">Baixe wallpapers exclusivos do Ignite Lab e personalize a sua máquina</p>
                         </div>
                         <div className="h-full p-6 flex items-center">
-                            <FileArrowDown size={24} />
+                        <CaretRight size={24} />
                         </div>
                     </a>
                 </div>
